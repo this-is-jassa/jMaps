@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+
+
+    <!-- RXJX -->
+    <script src="https://unpkg.com/@reactivex/rxjs@5.1.0/dist/global/Rx.js"></script>
+
+
+    <!-- MAPS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+
+
+    <!-- Material UI -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
+    <!-- <script defer src="index.js" ></script> -->
+    <script type="module" defer src="js/root.js"></script>
+
+    <title>JMaps</title>
+</head>
+
+<body>
+
+    <div id="map">
+
+    </div>
+
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp card" style="width: 500px; background-color: var(--primary);"
+        id="sidebar">
+        <form id="searchForm">
+
+            <input type="search" id="address-input1" placeholder="Choose the starting point" required />
+
+            <input type="search" class="my-2 mx-2" id="address-input2" placeholder="Choose destination" required />
+
+            <!-- FAB button -->
+            <div style="text-align: center;">
+                <button id="searchBtn" type="submit"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    <i class="material-icons">near_me</i>
+                    Navigate
+                </button>
+            </div>
+
+            <!-- <button id="searchBtn" type="submit" class="btn btn-primary btn-sm mb-3 px-3">Search</button> -->
+        </form>
+    </div>
+
+    <div id="navigate" >
+        <div id="progressBar" ></div>
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="position: relative;">
+            <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text" ><span id="title"> </span> <i id="sign" class="material-icons"></i></h2>
+            </div>
+
+            <div style="border-radius: 10px; background-color: black; color: white; margin-top: 7px; position: absolute; bottom: 0;" class="mdl-card__supporting-text" id="discription">
+                
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
