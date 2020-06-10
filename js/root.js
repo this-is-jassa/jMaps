@@ -68,7 +68,9 @@ $location.subscribe(res => {
             center: [...res.pointer]
         });
     if (res.route.draw) {
+        console.log(res.route.draw);
         mapObj.drawRoute(res.route.coord);
+        dom.showSteps([...res.route.steps]);
     }
 });
 
@@ -111,9 +113,7 @@ location.input2.on('change', function resultSelected(e) {
 });
 
 $('#searchForm').addEventListener('submit', searchRoute);
-
-
-
+$('#reset').addEventListener('click', reset)
 
 
 
@@ -157,7 +157,8 @@ function getRoute(e) {
         console.log(duration)
         console.log(steps)
 
-        dom.showSteps(steps);
+        // dom.showSteps(steps);
+
         let LocationData = { ...$location.getValue() };
 
         LocationData.route.draw = true;
@@ -167,13 +168,26 @@ function getRoute(e) {
         LocationData.route.distance = distance;
         LocationData.pointer = [...LocationData.startLocation];
 
-        $location.next(LocationData);
+        $location.next({...LocationData});
 
     };
 
     req.send();
 }
 
+function reset() {
+    const resetLoc = { ...$location.getValue() };
+
+    resetLoc.route.draw = false;
+
+    console.log(resetLoc.route.draw);
+
+    dom.terminateNotifications();
+    mapObj.checkAndDeleteRoute();
+
+    $location.next({...resetLoc});
+
+}
 
 
 

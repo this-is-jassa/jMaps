@@ -44,6 +44,8 @@ body{
     width: var(--sidebar_width); 
     background-color: var(--primary);
     transition: left 0.2s;
+
+
 }
 
 #sidebar:hover{
@@ -103,6 +105,11 @@ input {
     animation-name: progress;
     animation-iteration-count: infinite;
     animation-direction: alternate-reverse;
+}
+
+@keyframes sidebar {
+    from { left: calc( (-1 * var(--sidebar_width)) + 40px ); }
+    to{left: calc( (-1 * var(--sidebar_width)) + 20px );}
 }
 
 @keyframes navigate {

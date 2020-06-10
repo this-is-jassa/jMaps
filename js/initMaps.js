@@ -33,15 +33,23 @@ export default class InitMap {
     }
 
 
-
-    // Draw Up the line on map according to the array of cords
-
-    drawRoute(coords) {
-        // check if the route is already loaded
+    // Delete Current Route
+    checkAndDeleteRoute() {
         if (this.map.getSource('route')) {
             this.map.removeLayer('route');
             this.map.removeSource('route')
         }
+    }
+
+
+
+    // Draw Up the line on map according to the array of cords
+
+    drawRoute(coords) {
+        
+        // check if the route is already loaded
+        this.checkAndDeleteRoute();
+
         this.map.addLayer({
             "id": "route",
             "type": "line",

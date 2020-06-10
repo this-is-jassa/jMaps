@@ -34,10 +34,12 @@ export default class DOM {
             this.steps = [...steps];
 
             this.$dataflow.unsubscribe();
+            this.animateNavigation(false)
 
         } catch (err) { }
         
         finally {
+
             this.$dataflow = new Rx.BehaviorSubject(steps).switchMap(
                 () => {
                     return this.$interval
@@ -53,9 +55,19 @@ export default class DOM {
                 }
 
             })
+
         }
 
     }
+
+    terminateNotifications() {
+        try{
+            this.$dataflow.unsubscribe();
+        }catch(err) {
+
+        }
+    }
+
 
 
     // Animating the Notifiction Popup
