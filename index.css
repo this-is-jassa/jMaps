@@ -59,6 +59,17 @@ input {
     margin: 10px 5px;
 }
 
+.navigation_animation{
+    animation-name: navigate;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+.progressBar_animation {
+    animation-name: progress;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+}
+
 @keyframes navigate {
     0% {bottom: -200px;}
     20% {bottom: 20px;}
