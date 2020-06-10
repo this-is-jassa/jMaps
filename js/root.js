@@ -1,8 +1,34 @@
+
+// #########################################################
+// ##################### IMPORTS ##########################
+// #######################################################
+
 import InitMap from './initMaps.js';
 import Location from './location.js';
 import DOM from './dom.js';
 
+
+
+
+
+// #########################################################
+// ##################### Global Variables ##########################
+// #######################################################
+
 const $ = (s, o = document) => o.querySelector(s);
+
+let mapObj = new InitMap()
+let location = new Location();
+let dom = new DOM();
+let jmap = mapObj.map;
+
+
+
+
+
+// #########################################################
+// ##################### Observbles ##########################
+// #######################################################
 
 
 let $location = new Rx.BehaviorSubject({
@@ -29,15 +55,12 @@ let $mapStyle = new Rx.BehaviorSubject({
 
 
 
-let mapObj = new InitMap()
-let location = new Location();
-let dom = new DOM();
-
-let jmap = mapObj.map;
 
 
+// #########################################################
+// ##################### Subscriptions ##########################
+// #######################################################
 
-// Subscriptions :-
 
 $location.subscribe(res => {
     jmap.flyTo(
@@ -54,7 +77,14 @@ $mapStyle.subscribe(res => {
 })
 
 
-// Events :-
+
+
+
+
+// #########################################################
+// ##################### Events ##########################
+// #######################################################
+
 
 location.input1.on('change', (e) => {
 
@@ -82,7 +112,15 @@ location.input2.on('change', function resultSelected(e) {
 
 $('#searchForm').addEventListener('submit', searchRoute);
 
-// Helpers
+
+
+
+
+
+// #########################################################
+// ##################### Helper Functions ##########################
+// #######################################################
+
 
 function searchRoute(event) {
     event.preventDefault();
@@ -106,10 +144,10 @@ function getRoute(e) {
     req.responseType = 'json';
     req.open('GET', url, true);
     req.onload = function () {
-        var jsonResponse = req.response;
-        console.log(jsonResponse);
 
-        var distance = jsonResponse.routes[0].distance * 0.001;
+        var jsonResponse = req.response;
+
+        var distance = Math.ceil(jsonResponse.routes[0].distance * 0.001);
         var duration = jsonResponse.routes[0].duration / 60;
         var steps = jsonResponse.routes[0].legs[0].steps;
         var coords = jsonResponse.routes[0].geometry;
@@ -130,7 +168,6 @@ function getRoute(e) {
         LocationData.pointer = [...LocationData.startLocation];
 
         $location.next(LocationData);
-
 
     };
 

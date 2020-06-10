@@ -34,13 +34,14 @@
 
     </div>
 
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp card" style="width: 500px; background-color: var(--primary);"
-        id="sidebar">
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp card" id="sidebar">
+
+        <h2 id="heading" >JMaps.</h2>
+
         <form id="searchForm">
+            <input class="input" type="search" id="address-input1" placeholder="Starting Point" required />
 
-            <input type="search" id="address-input1" placeholder="Choose the starting point" required />
-
-            <input type="search" class="my-2 mx-2" id="address-input2" placeholder="Choose destination" required />
+            <input class="input" type="search" id="address-input2" placeholder="Destination" required />
 
             <!-- FAB button -->
             <div style="text-align: center;">
@@ -48,6 +49,10 @@
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     <i class="material-icons">near_me</i>
                     Navigate
+                </button>
+                <button id="reset" type="submit"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    <i class="material-icons">delete_outline</i>
                 </button>
             </div>
 

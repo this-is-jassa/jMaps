@@ -1,68 +1,81 @@
 export default class DOM {
 
-    AnimationTime = 1000;
 
-    $ = (s, o = document) => o.querySelector(s);
-    // $$ = (s, o = document) => o.querySelectorAll(s);
+// #########################################################
+// ##################### Global Variables ##########################
+// #######################################################
 
-    steps = [];
-
-    $interval = new Rx.Observable.interval(this.AnimationTime);
+    AnimationTime = 3000;
     $dataflow;
-
+    
+    $ = (s, o = document) => o.querySelector(s);
+    steps = [];
+    
     directionsIcon = {
         left: 'arrow_back',
         right: 'arrow_forward',
         "slight right": 'call_made',
         "slight left": 'arrow_back'
     }
-
-
+    
+    $interval = new Rx.Observable.interval(this.AnimationTime);
 
     constructor() { }
 
-    showSteps(steps = []) {
 
+
+// #########################################################
+// ##################### Helper Functions ##########################
+// #######################################################
+
+    showSteps(steps = []) {
 
         try {
             this.steps = [...steps];
+
             this.$dataflow.unsubscribe();
 
-
-        } catch (err) {
-
-        } finally {
+        } catch (err) { }
+        
+        finally {
             this.$dataflow = new Rx.BehaviorSubject(steps).switchMap(
                 () => {
                     return this.$interval
                 }
             ).subscribe(value => {
 
+                this.animateNavigation(true, this.steps[value].maneuver.instruction, this.steps[value].name, this.directionsIcon[this.steps[value].maneuver.modifier]);
 
-                this.$('#navigate').classList.add('navigation_animation');
-                this.$('#navigate').style.animationDuration = (this.AnimationTime / 1000) + 's';
-
-                this.$('#progressBar').classList.add('progressBar_animation');
-                this.$('#progressBar').style.animationDuration = (this.AnimationTime / 1000) + 's';
-
-                this.$('#title').innerHTML = this.steps[value].maneuver.instruction;
-                this.$('#discription').innerHTML = this.steps[value].name;
-                this.$('#sign').innerHTML = this.directionsIcon[this.steps[value].maneuver.modifier];
-                
                 if (value === this.steps.length - 1) {
-
-                    console.log(this.$('#navigate').classList);
-                    this.$('#navigate').classList.remove('navigation_animation');
-                    this.$('#progressBar').classList.remove('progressBar_animation');
+                    this.animateNavigation(false);
 
                     this.$dataflow.unsubscribe();
-
                 }
 
             })
         }
 
+    }
 
+
+    // Animating the Notifiction Popup
+    animateNavigation(add = true, title = 'Loading', discription = 'Loading', sign = '', minutes = ' Loading') {
+
+        if (add) {
+            this.$('#navigate').classList.add('navigation_animation');
+            this.$('#progressBar').classList.add('progressBar_animation');
+
+            this.$('#navigate').style.animationDuration = (this.AnimationTime / 1000) + 's';
+            this.$('#progressBar').style.animationDuration = (this.AnimationTime / 1000) + 's';
+
+            this.$('#title').innerHTML = title;
+            this.$('#discription').innerHTML = discription;
+            this.$('#sign').innerHTML = sign;
+
+        } else {
+            this.$('#navigate').classList.remove('navigation_animation');
+            this.$('#progressBar').classList.remove('progressBar_animation');
+        }
     }
 
 }

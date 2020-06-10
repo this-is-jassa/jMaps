@@ -1,5 +1,10 @@
 export default class Location {
 
+
+    // #########################################################
+    // ##################### Global Variables ##########################
+    // #######################################################
+
     input1;
     input2;
 
@@ -8,8 +13,15 @@ export default class Location {
         this._init()
     }
 
+
+    // #########################################################
+    // ##################### Helper Functions ##########################
+    // #######################################################
+
+    
+    // Initializing the Form
     _init() {
-        
+
         const apiKey = 'f5ee4a045ea9d2b9d41174f7812f7f51';
         const appID = 'plJI4ZSOG6E6';
 
@@ -40,8 +52,10 @@ export default class Location {
         });
     }
 
+
+    // Get the currrent location of user but I am not using it anywhere yet (It is giving inacurate results)
     getCurrentLoc() {
-        if(!navigator.geolocation) alert("Geolocation is not supported by this browser."); return;
+        if (!navigator.geolocation) alert("Geolocation is not supported by this browser."); return;
 
         navigator.geolocation.getCurrentPosition((position) => {
             return [position.coords.longitude, position.coords.latitude]

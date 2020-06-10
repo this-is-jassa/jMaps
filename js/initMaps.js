@@ -2,6 +2,11 @@ import DOM from './dom.js'
 
 export default class InitMap {
 
+
+    // #########################################################
+    // ##################### Gobal Varibles ##########################
+    // #######################################################
+
     map;
 
     constructor() {
@@ -9,18 +14,27 @@ export default class InitMap {
         this._init();
     }
 
+
+    // #########################################################
+    // ##################### Helper Functions ##########################
+    // #######################################################
+
+    
+    // Initialise the map By setting necessory parameters
     _init() {
         this.map = new mapboxgl.Map({
-            container: 'map', // container id
-            style: 'mapbox://styles/mapbox/outdoors-v11', //hosted style id
-            center: [-79.3871, 43.6426], // starting position
-            zoom: 17.5, // starting zoom,
+            container: 'map', 
+            style: 'mapbox://styles/mapbox/outdoors-v11', 
+            center: [-79.3871, 43.6426], 
+            zoom: 17.5,
             bearing: 0,
             pitch: 30
         });
     }
 
 
+
+    // Draw Up the line on map according to the array of cords
 
     drawRoute(coords) {
         // check if the route is already loaded
