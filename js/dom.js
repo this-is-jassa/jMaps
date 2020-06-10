@@ -1,32 +1,32 @@
 export default class DOM {
 
 
-// #########################################################
-// ##################### Global Variables ##########################
-// #######################################################
+    // #########################################################
+    // ##################### Global Variables ##########################
+    // #######################################################
 
     AnimationTime = 3000;
     $dataflow;
-    
+
     $ = (s, o = document) => o.querySelector(s);
     steps = [];
-    
+
     directionsIcon = {
         left: 'arrow_back',
         right: 'arrow_forward',
         "slight right": 'call_made',
         "slight left": 'arrow_back'
     }
-    
+
     $interval = new Rx.Observable.interval(this.AnimationTime);
 
     constructor() { }
 
 
 
-// #########################################################
-// ##################### Helper Functions ##########################
-// #######################################################
+    // #########################################################
+    // ##################### Helper Functions ##########################
+    // #######################################################
 
     showSteps(steps = []) {
 
@@ -37,7 +37,7 @@ export default class DOM {
             this.animateNavigation(false)
 
         } catch (err) { }
-        
+
         finally {
 
             this.$dataflow = new Rx.BehaviorSubject(steps).switchMap(
@@ -45,6 +45,7 @@ export default class DOM {
                     return this.$interval
                 }
             ).subscribe(value => {
+                console.log(value)
 
                 this.animateNavigation(true, this.steps[value].maneuver.instruction, this.steps[value].name, this.directionsIcon[this.steps[value].maneuver.modifier]);
 
@@ -60,11 +61,17 @@ export default class DOM {
 
     }
 
-    terminateNotifications() {
-        try{
+    reset() {
+        try {
             this.$dataflow.unsubscribe();
-        }catch(err) {
+            this.animateNavigation(false);
 
+            
+        } catch (err) { }
+        finally{
+
+            this.$('#address-input1').value = '';
+            this.$('#address-input2').value = '';
         }
     }
 

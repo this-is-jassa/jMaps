@@ -22,17 +22,7 @@ let location = new Location();
 let dom = new DOM();
 let jmap = mapObj.map;
 
-
-
-
-
-// #########################################################
-// ##################### Observbles ##########################
-// #######################################################
-
-
-let $location = new Rx.BehaviorSubject({
-    currentLocation: [0, 0],
+const initialLocation = {
     startLocation: [0, 0],
     endLocation: [0, 0],
     pointer: [-79.3871, 43.6426],   // Indicated where to fly,
@@ -43,7 +33,16 @@ let $location = new Rx.BehaviorSubject({
         duration: 0,
         distance: 0
     }
-})
+}
+
+
+
+// #########################################################
+// ##################### Observbles ##########################
+// #######################################################
+
+
+let $location = new Rx.BehaviorSubject(initialLocation)
 
 
 let $mapStyle = new Rx.BehaviorSubject({
@@ -68,7 +67,7 @@ $location.subscribe(res => {
             center: [...res.pointer]
         });
     if (res.route.draw) {
-        console.log(res.route.draw);
+        console.log("USS")
         mapObj.drawRoute(res.route.coord);
         dom.showSteps([...res.route.steps]);
     }
@@ -97,7 +96,7 @@ location.input1.on('change', (e) => {
     LocationData.startLocation = [lng, lat];
     LocationData.pointer = [lng, lat];
 
-    $location.next(LocationData);
+    $location.next({ ...LocationData });
 })
 
 location.input2.on('change', function resultSelected(e) {
@@ -108,7 +107,7 @@ location.input2.on('change', function resultSelected(e) {
     LocationData.endLocation = [lng, lat];
     LocationData.pointer = [lng, lat];
 
-    $location.next(LocationData);
+    $location.next({ ...LocationData });
 
 });
 
@@ -123,6 +122,7 @@ $('#reset').addEventListener('click', reset)
 
 
 function searchRoute(event) {
+    console.log("CALLED")
     event.preventDefault();
 
     let LocationData = { ...$location.getValue() };
@@ -168,7 +168,7 @@ function getRoute(e) {
         LocationData.route.distance = distance;
         LocationData.pointer = [...LocationData.startLocation];
 
-        $location.next({...LocationData});
+        $location.next({ ...LocationData });
 
     };
 
@@ -176,16 +176,15 @@ function getRoute(e) {
 }
 
 function reset() {
-    const resetLoc = { ...$location.getValue() };
 
-    resetLoc.route.draw = false;
 
-    console.log(resetLoc.route.draw);
+    let locationData = {...$location.getValue()}
+    locationData.route.draw = false;
 
-    dom.terminateNotifications();
+    dom.reset();
     mapObj.checkAndDeleteRoute();
 
-    $location.next({...resetLoc});
+    $location.next(locationData);
 
 }
 
