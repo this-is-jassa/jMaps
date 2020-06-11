@@ -74,38 +74,34 @@ $location.subscribe(res => {
 // #######################################################
 
 
-location.input1.on('change', (e) => {
-
-    const { lat, lng } = e.suggestion.latlng;
-
-    let LocationData = { ...$location.getValue() };
-
-    LocationData.startLocation = [lng, lat];
-    LocationData.pointer = [lng, lat];
-
-    $location.next({ ...LocationData });
-})
-
-location.input2.on('change', function resultSelected(e) {
-
-    const { lat, lng } = e.suggestion.latlng;
-    let LocationData = { ...$location.getValue() };
-
-    LocationData.endLocation = [lng, lat];
-    LocationData.pointer = [lng, lat];
-
-    $location.next({ ...LocationData });
-
-});
+location.input1.on('change', (e) => setLatLong(e, true))
+location.input2.on('change', (e) => setLatLong(e, false));
 
 $('#searchForm').addEventListener('submit', searchRoute);
 $('#reset').addEventListener('click', reset)
 $('#themeToggle').addEventListener('click', changeTheme)
 
 
+
+
+
 // #########################################################
 // ##################### Helper Functions ##########################
 // #######################################################
+
+
+function setLatLong(e, inStartLocation = true) {
+
+    const { lat, lng } = e.suggestion.latlng;
+    let LocationData = { ...$location.getValue() };
+
+    (inStartLocation)? LocationData.startLocation = [lng, lat]: LocationData.endLocation = [lng, lat];
+
+    LocationData.pointer = [lng, lat];
+
+    $location.next({ ...LocationData });
+}
+
 
 
 function searchRoute(event) {
@@ -142,8 +138,6 @@ function getRoute(e) {
         console.log(duration)
         console.log(steps)
 
-        // dom.showSteps(steps);
-
         let LocationData = { ...$location.getValue() };
 
         LocationData.route.draw = true;
@@ -162,7 +156,7 @@ function getRoute(e) {
 
 function reset() {
 
-    let locationData = {...$location.getValue()}
+    let locationData = { ...$location.getValue() }
     locationData.route.draw = false;
 
     dom.reset();
@@ -172,12 +166,12 @@ function reset() {
 
 }
 
-function changeTheme() { 
+function changeTheme() {
     const isDark = $('#themeToggle').checked;
 
     dom.changeTheme(isDark);
 
-    if(isDark) {
+    if (isDark) {
         return jmap.setStyle('mapbox://styles/mapbox/' + 'dark-v10');
     }
     jmap.setStyle('mapbox://styles/mapbox/' + 'outdoors-v11');

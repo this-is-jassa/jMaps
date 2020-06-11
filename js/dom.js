@@ -69,8 +69,8 @@ export default class DOM {
         }
         x.classList.remove('dark');
         x.classList.add('light');
-
     }
+
 
     reset() {
         try {
