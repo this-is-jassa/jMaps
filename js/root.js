@@ -59,7 +59,6 @@ $location.subscribe(res => {
             center: [...res.pointer]
         });
     if (res.route.draw) {
-        console.log("USS")
         mapObj.drawRoute(res.route.coord);
         dom.showSteps([...res.route.steps]);
     }
