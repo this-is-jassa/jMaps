@@ -28,13 +28,18 @@
     <title>JMaps</title>
 </head>
 
-<body>
+<body id="body" class="dark">
 
     <div id="map">
 
     </div>
 
     <div class="demo-card-wide mdl-card mdl-shadow--2dp card" id="sidebar">
+        
+        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="themeToggle" >
+            <input type="checkbox" id="themeToggle" class="mdl-switch__input" checked>
+            <span class="mdl-switch__label" style="color: var(--color);">Dark</span>
+        </label>
 
         <h2 id="heading">JMaps.</h2>
 
@@ -58,13 +63,16 @@
         <button id="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
             <i class="material-icons">delete_outline</i>
         </button>
+
     </div>
 
     <div id="navigate">
         <div id="progressBar"></div>
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="position: relative;">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp"
+            style="position: relative; background-color: var(--primary); color: var(--color);">
             <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text"><span id="title"> </span> <i id="sign" class="material-icons"></i></h2>
+                <h2 class="mdl-card__title-text" style="color: var(--color);"><span id="title"> </span> <i id="sign"
+                        class="material-icons"></i></h2>
             </div>
 
             <div style="border-radius: 10px; background-color: black; color: white; margin-top: 7px; position: absolute; bottom: 0;"

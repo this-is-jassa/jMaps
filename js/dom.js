@@ -45,7 +45,6 @@ export default class DOM {
                     return this.$interval
                 }
             ).subscribe(value => {
-                console.log(value)
 
                 this.animateNavigation(true, this.steps[value].maneuver.instruction, this.steps[value].name, this.directionsIcon[this.steps[value].maneuver.modifier]);
 
@@ -61,14 +60,26 @@ export default class DOM {
 
     }
 
+    changeTheme(isDark) {
+        const x = document.getElementsByTagName("BODY")[0];
+        if (isDark) {
+            x.classList.remove('light');
+            x.classList.add('dark');
+            return;
+        }
+        x.classList.remove('dark');
+        x.classList.add('light');
+
+    }
+
     reset() {
         try {
             this.$dataflow.unsubscribe();
             this.animateNavigation(false);
 
-            
+
         } catch (err) { }
-        finally{
+        finally {
 
             this.$('#address-input1').value = '';
             this.$('#address-input2').value = '';

@@ -24,7 +24,7 @@ export default class InitMap {
     _init() {
         this.map = new mapboxgl.Map({
             container: 'map', 
-            style: 'mapbox://styles/mapbox/outdoors-v11', 
+            style: 'mapbox://styles/mapbox/dark-v10', 
             center: [-79.3871, 43.6426], 
             zoom: 17.5,
             bearing: 0,
@@ -34,7 +34,7 @@ export default class InitMap {
 
 
     // Delete Current Route
-    checkAndDeleteRoute() {
+    reset() {
         if (this.map.getSource('route')) {
             this.map.removeLayer('route');
             this.map.removeSource('route')
@@ -48,7 +48,7 @@ export default class InitMap {
     drawRoute(coords) {
         
         // check if the route is already loaded
-        this.checkAndDeleteRoute();
+        this.reset();
 
         this.map.addLayer({
             "id": "route",
@@ -66,7 +66,7 @@ export default class InitMap {
                 "line-cap": "round"
             },
             "paint": {
-                "line-color": "#1D1B1B",
+                "line-color": "#4264FB",
                 "line-width": 10,
                 "line-opacity": 1
             }

@@ -45,14 +45,6 @@ const initialLocation = {
 let $location = new Rx.BehaviorSubject(initialLocation)
 
 
-let $mapStyle = new Rx.BehaviorSubject({
-    theme: 'outdoors-v11',
-    zoom: 17.5, // starting zoom,
-    bearing: 0,
-    pitch: 30
-})
-
-
 
 
 
@@ -72,11 +64,6 @@ $location.subscribe(res => {
         dom.showSteps([...res.route.steps]);
     }
 });
-
-$mapStyle.subscribe(res => {
-
-})
-
 
 
 
@@ -113,7 +100,7 @@ location.input2.on('change', function resultSelected(e) {
 
 $('#searchForm').addEventListener('submit', searchRoute);
 $('#reset').addEventListener('click', reset)
-
+$('#themeToggle').addEventListener('click', changeTheme)
 
 
 // #########################################################
@@ -122,11 +109,9 @@ $('#reset').addEventListener('click', reset)
 
 
 function searchRoute(event) {
-    console.log("CALLED")
     event.preventDefault();
 
     let LocationData = { ...$location.getValue() };
-
 
     const newCoords = LocationData.startLocation.join(',') + ';' + LocationData.endLocation.join(',');
 
@@ -177,14 +162,25 @@ function getRoute(e) {
 
 function reset() {
 
-
     let locationData = {...$location.getValue()}
     locationData.route.draw = false;
 
     dom.reset();
-    mapObj.checkAndDeleteRoute();
+    mapObj.reset();
 
     $location.next(locationData);
+
+}
+
+function changeTheme() { 
+    const isDark = $('#themeToggle').checked;
+
+    dom.changeTheme(isDark);
+
+    if(isDark) {
+        return jmap.setStyle('mapbox://styles/mapbox/' + 'dark-v10');
+    }
+    jmap.setStyle('mapbox://styles/mapbox/' + 'outdoors-v11');
 
 }
 

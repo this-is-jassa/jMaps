@@ -2,11 +2,21 @@
 
 
 :root{
+    --sidebar_width: 500px
+}
+
+.light{
     --primary: rgb(243, 243, 243);
     --danger: rgb(119, 46, 46);
     --cprimary: rgb(50, 110, 201);
     --color: #000000;
-    --sidebar_width: 500px
+}
+
+.dark {
+    --primary: rgb(0, 0, 0);
+    --danger: rgb(119, 46, 46);
+    --cprimary: rgb(50, 110, 201);
+    --color: #ffff;
 }
 
 body{
@@ -56,6 +66,7 @@ body{
     position: absolute;
     bottom: -200px;
     left: 30px;
+    background-color: var(--primary);
     
 }
 
@@ -79,16 +90,15 @@ body{
     color: white;
     font-family: 'Nunito', sans-serif;
 
-
 }
 
 #reset {
-    margin: 15px 8px;
+    margin: 10px 200px;
+    transform: scale(0.8);
     background-color: var(--danger);
     letter-spacing: 1px;
     color: white;
     font-family: 'Nunito', sans-serif;
-
 
 }
 
