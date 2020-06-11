@@ -91,7 +91,8 @@ $('#themeToggle').addEventListener('click', changeTheme)
 
 function setLatLong(e, inStartLocation = true) {
 
-    const { lat, lng } = e.sudggestion.latlng;
+
+    const { lat, lng } = e.suggestion.latlng;
     let LocationData = { ...$location.getValue() };
 
     (inStartLocation)? LocationData.startLocation = [lng, lat]: LocationData.endLocation = [lng, lat];
