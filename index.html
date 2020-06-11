@@ -35,34 +35,42 @@
     </div>
 
     <div class="demo-card-wide mdl-card mdl-shadow--2dp card" id="sidebar">
+        <div id="sidebarWrapper">
 
-        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="themeToggle">
-            <input type="checkbox" id="themeToggle" class="mdl-switch__input" checked>
-            <span class="mdl-switch__label" style="color: var(--color);">Dark</span>
-        </label>
-
-        <h2 id="heading">JMaps.</h2>
-
-        <form id="searchForm">
-            <input class="input" type="search" id="address-input1" placeholder="Starting Point" required />
-
-            <input class="input" type="search" id="address-input2" placeholder="Destination" required />
-
-            <!-- FAB button -->
-            <div style="text-align: center;">
-                <button id="searchBtn" type="submit"
-                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                    <i class="material-icons">near_me</i>
-                    Navigate
-                </button>
-            </div>
+            <button id="navBtn" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">arrow_back</i>
+            </button>
 
 
-            <!-- <button id="searchBtn" type="submit" class="btn btn-primary btn-sm mb-3 px-3">Search</button> -->
-        </form>
-        <button id="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-            <i class="material-icons">delete_outline</i>
-        </button>
+
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="themeToggle">
+                <input type="checkbox" id="themeToggle" class="mdl-switch__input" checked>
+                <span class="mdl-switch__label" style="color: var(--color);">Dark</span>
+            </label>
+
+            <h2 id="heading">JMaps.</h2>
+
+            <form id="searchForm">
+                <input class="input" type="search" id="address-input1" placeholder="Starting Point" required />
+
+                <input class="input" type="search" id="address-input2" placeholder="Destination" required />
+
+                <!-- FAB button -->
+                <div style="text-align: center;">
+                    <button id="searchBtn" type="submit"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                        <i class="material-icons">near_me</i>
+                        Navigate
+                    </button>
+                </div>
+
+
+                <!-- <button id="searchBtn" type="submit" class="btn btn-primary btn-sm mb-3 px-3">Search</button> -->
+            </form>
+            <button id="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                <i class="material-icons">delete_outline</i>
+            </button>
+        </div>
 
     </div>
 

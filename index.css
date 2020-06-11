@@ -27,7 +27,6 @@ body{
 
 .input{
     font-family: 'Nunito', sans-serif;
-
 }
 
 #heading {
@@ -35,6 +34,17 @@ body{
     color: var(--color);
     font-family: 'Nunito', sans-serif;
     font-weight: bold;
+}
+
+#sidebarWrapper{
+    overflow: visible;
+    position: relative;
+}
+
+#navBtn {
+    position: absolute;
+    right: -30px;
+    top: 0;
 }
 
 #map {
@@ -54,8 +64,6 @@ body{
     width: var(--sidebar_width); 
     background-color: var(--primary);
     transition: left 0.2s;
-
-
 }
 
 #sidebar:hover{
